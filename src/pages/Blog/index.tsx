@@ -1,7 +1,5 @@
+import { Profile } from '../../components/Profile'
+
 export function Blog() {
-  return (
-    <>
-      <h1>Github Blog</h1>
-    </>
-  )
+  return <Profile />
 }
