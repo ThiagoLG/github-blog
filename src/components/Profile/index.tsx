@@ -1,42 +1,57 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+  ProfileAvatar,
   ProfileContainer,
+  ProfileContent,
   ProfileInfoItem,
   ProfileInfosContainer,
 } from './styles'
-import { faBuilding } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBuilding,
+  faUpRightFromSquare,
+  faUserGroup,
+} from '@fortawesome/free-solid-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 export function Profile() {
   return (
     <ProfileContainer>
-      <img src="https://github.com/ThiagoLG.png" alt="Profile Picture" />
+      <ProfileAvatar
+        src="https://github.com/ThiagoLG.png"
+        alt="Profile Picture"
+      />
 
-      <div className="UserTitle">
-        <span>Cameron Williasom</span>
-        <a href="https://github.com/ThiagoLG">
-          GITHUB <FontAwesomeIcon icon="arrow-up-right-from-square" />
-        </a>
-      </div>
+      <ProfileContent>
+        <div className="UserTitle">
+          <span>Thiago Lourençon Ghebra</span>
+          <a href="https://github.com/ThiagoLG">
+            <span>GITHUB </span>
+            <FontAwesomeIcon icon={faUpRightFromSquare} />
+          </a>
+        </div>
 
-      <div className="UserBio">
-        <span>
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </span>
-      </div>
+        <div className="UserBio">
+          <span>
+            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
+            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
+            volutpat pulvinar vel mass.
+          </span>
+        </div>
 
-      <ProfileInfosContainer>
-        <ProfileInfoItem>cameronwill</ProfileInfoItem>
+        <ProfileInfosContainer>
+          <ProfileInfoItem>
+            <FontAwesomeIcon icon={faGithub} />
+            thiagolg
+          </ProfileInfoItem>
+          <ProfileInfoItem>
+            <FontAwesomeIcon icon={faBuilding} /> Class Solutions
+          </ProfileInfoItem>
 
-        <ProfileInfoItem>
-          <FontAwesomeIcon icon={faBuilding} /> Rocketseat
-        </ProfileInfoItem>
-
-        <ProfileInfoItem>
-          <FontAwesomeIcon icon="user-group" /> 32 followers
-        </ProfileInfoItem>
-      </ProfileInfosContainer>
+          <ProfileInfoItem>
+            <FontAwesomeIcon icon={faUserGroup} /> 4 followers
+          </ProfileInfoItem>
+        </ProfileInfosContainer>
+      </ProfileContent>
     </ProfileContainer>
   )
 }
