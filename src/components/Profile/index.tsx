@@ -12,43 +12,64 @@ import {
   faUserGroup,
 } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { api } from '../../lib/axios'
+import { useEffect, useState } from 'react'
+
+interface IProfileInfos {
+  avatar_url: string
+  followers: number
+  html_url: string
+  name: string
+  login: string
+  company: string
+  bio: string
+}
 
 export function Profile() {
+  const [userProfile, setUserProfile] = useState<IProfileInfos>()
+
+  async function getProfileInfos() {
+    const urlParams = new URLSearchParams(location.search)
+    const githubUser = urlParams.get('github_user') || 'ThiagoLG'
+    const response = await api.get(`/users/${githubUser}`)
+
+    setUserProfile(response.data)
+  }
+
+  useEffect(() => {
+    getProfileInfos()
+  }, [])
+
   return (
     <ProfileContainer>
-      <ProfileAvatar
-        src="https://github.com/ThiagoLG.png"
-        alt="Profile Picture"
-      />
+      <ProfileAvatar src={userProfile?.avatar_url} alt="Profile Picture" />
 
       <ProfileContent>
         <div className="UserTitle">
-          <span>Thiago Lourençon Ghebra</span>
-          <a href="https://github.com/ThiagoLG">
+          <span>{userProfile?.name}</span>
+          <a href={userProfile?.html_url}>
             <span>GITHUB </span>
             <FontAwesomeIcon icon={faUpRightFromSquare} />
           </a>
         </div>
 
         <div className="UserBio">
-          <span>
-            Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-            viverra massa quam dignissim aenean malesuada suscipit. Nunc,
-            volutpat pulvinar vel mass.
-          </span>
+          <span>{userProfile?.bio}</span>
         </div>
 
         <ProfileInfosContainer>
           <ProfileInfoItem>
             <FontAwesomeIcon icon={faGithub} />
-            thiagolg
+            {userProfile?.login}
           </ProfileInfoItem>
+          {userProfile?.company && (
+            <ProfileInfoItem>
+              <FontAwesomeIcon icon={faBuilding} /> {userProfile.company}
+            </ProfileInfoItem>
+          )}
           <ProfileInfoItem>
-            <FontAwesomeIcon icon={faBuilding} /> Class Solutions
-          </ProfileInfoItem>
-
-          <ProfileInfoItem>
-            <FontAwesomeIcon icon={faUserGroup} /> 4 followers
+            <FontAwesomeIcon icon={faUserGroup} /> {userProfile?.followers || 0}{' '}
+            follower{(userProfile?.followers || 0) > 1 ? 's' : ''}
           </ProfileInfoItem>
         </ProfileInfosContainer>
       </ProfileContent>

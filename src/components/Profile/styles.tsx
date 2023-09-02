@@ -5,7 +5,7 @@ export const ProfileContainer = styled.section`
   height: auto;
   padding: 2rem 2.5rem;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr;
   gap: 2rem;
 
   border-radius: 0.625rem;
