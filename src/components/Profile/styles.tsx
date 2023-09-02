@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const ProfileContainer = styled.section`
-  width: 54rem;
-  height: 13.25rem;
+  /* width: 54rem; */
+  height: auto;
   padding: 2rem 2.5rem;
   display: grid;
   grid-template-columns: 1fr auto;
