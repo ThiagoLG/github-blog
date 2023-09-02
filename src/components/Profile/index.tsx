@@ -29,11 +29,16 @@ export function Profile() {
   const [userProfile, setUserProfile] = useState<IProfileInfos>()
 
   async function getProfileInfos() {
-    const urlParams = new URLSearchParams(location.search)
-    const githubUser = urlParams.get('github_user') || 'ThiagoLG'
-    const response = await api.get(`/users/${githubUser}`)
-
+    const response = await api.get(`/users/${getGitUserFromUrl()}`)
     setUserProfile(response.data)
+  }
+
+  function getGitUserFromUrl() {
+    const validateRepoNameRegex = /^.+\/.+$/
+    const urlParams = new URLSearchParams(location.search)
+    const gitRepo = urlParams.get('repository') || ''
+    if (validateRepoNameRegex.test(gitRepo)) return gitRepo.split('/')[0]
+    return 'ThiagoLG'
   }
 
   useEffect(() => {

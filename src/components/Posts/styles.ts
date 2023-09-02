@@ -7,7 +7,7 @@ export const PostContainer = styled.article`
   padding: 2rem;
   background: ${({ theme }) => theme['base-post']};
   display: grid;
-  grid-template-columns: 1fr 5rem;
+  grid-template-columns: 1fr auto;
   grid-template-rows: 3.75rem auto;
   gap: 1.25rem;
 
@@ -43,5 +43,19 @@ export const PostContainer = styled.article`
 
     font-size: 1rem;
     line-height: 150%;
+  }
+`
+export const IssuesFeedbackContainer = styled.div`
+  width: 100%;
+  grid-column: 1 / 3;
+  text-align: center;
+  font-size: 1.25rem;
+
+  h1 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: ${({ theme }) => theme['base-text']};
+    opacity: 0.75;
   }
 `

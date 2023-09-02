@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
  }
 
  #root {
-  background: ${({ theme }) => theme['base-background']}
+  background: ${({ theme }) => theme['base-background']};
+  min-height: 100vh;
  }
 `
