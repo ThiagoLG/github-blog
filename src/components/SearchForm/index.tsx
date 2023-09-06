@@ -6,10 +6,10 @@ import { SearchFormContainer } from './styles'
 import * as z from 'zod'
 
 export function SearchForm() {
-  const { loadingState, posts } = useContext(PostsContext)
+  const { loadingState, posts, getRepositoryInfos } = useContext(PostsContext)
 
   const SearchFormSchema = z.object({
-    search: z.string(),
+    searchTerm: z.string(),
   })
 
   type SearchFormInputs = z.infer<typeof SearchFormSchema>
@@ -19,8 +19,10 @@ export function SearchForm() {
   })
 
   async function submitSearch(data: SearchFormInputs) {
+    getRepositoryInfos(data.searchTerm)
     console.log(data)
   }
+
   return (
     <SearchFormContainer onSubmit={handleSubmit(submitSearch)}>
       <label htmlFor="search">Publications</label>
@@ -36,7 +38,7 @@ export function SearchForm() {
         type="text"
         id="search"
         placeholder="search content"
-        {...register('search')}
+        {...register('searchTerm')}
       />
     </SearchFormContainer>
   )

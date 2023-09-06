@@ -19,7 +19,7 @@ type LoadingState = 'error' | 'laoding' | 'success'
 interface IPostsContextType {
   posts: IPostInfos[]
   loadingState: LoadingState
-  getRepositoryInfos: () => Promise<void>
+  getRepositoryInfos: (query?: string) => Promise<void>
 }
 
 export const PostsContext = createContext({} as IPostsContextType)
@@ -27,11 +27,11 @@ export function PostsProvider({ children }: IPostsProviderProps) {
   const [posts, setPosts] = useState<IPostInfos[]>([])
   const [loadingState, setLoadingState] = useState<LoadingState>('laoding')
 
-  async function getRepositoryInfos() {
+  async function getRepositoryInfos(query = '') {
     try {
       const response = await api.get(`/search/issues`, {
         params: {
-          q: `repo:${getGitRepoFromUrl()}`,
+          q: `${query + ' '}repo:${getGitRepoFromUrl()}`,
         },
       })
 
