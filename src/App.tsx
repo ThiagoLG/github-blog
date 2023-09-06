@@ -1,10 +1,11 @@
 import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './styles/theme/default'
 import { GlobalStyles } from './styles/global'
-import { Blog } from './pages/Blog'
 import { Header } from './components/Header'
 import { MainContainer } from './styles'
 import { PostsProvider } from './contexts/PostsContext'
+import { BrowserRouter } from 'react-router-dom'
+import { Router } from './Router'
 
 export function App() {
   return (
@@ -14,7 +15,9 @@ export function App() {
         <PostsProvider>
           <Header />
           <MainContainer>
-            <Blog />
+            <BrowserRouter>
+              <Router />
+            </BrowserRouter>
           </MainContainer>
         </PostsProvider>
       </ThemeProvider>
