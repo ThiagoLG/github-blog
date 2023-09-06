@@ -6,6 +6,16 @@ interface IPostsProviderProps {
   children: ReactNode
 }
 
+export interface IGithubIssueProps {
+  title: string
+  body: string
+  created_at: string
+  html_url: string
+  user: {
+    login: string
+  }
+}
+
 export interface IPostInfos {
   id: number
   body: string
