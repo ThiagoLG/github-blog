@@ -37,7 +37,7 @@ export const HeaderFlashes = styled.div`
 
   div {
     position: absolute;
-    opacity: 0.15;
+    opacity: 0.2;
     background: ${({ theme }) => theme.white};
 
     &:nth-child(1) {
