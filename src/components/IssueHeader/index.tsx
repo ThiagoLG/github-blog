@@ -1,6 +1,7 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import {
   faArrowUpRightFromSquare,
+  faCalendarDay,
   faChevronLeft,
   faComment,
 } from '@fortawesome/free-solid-svg-icons'
@@ -40,7 +41,7 @@ export function IssueHeader({ issueObj }: IssueItemProps) {
             <span>{issueObj?.user.login}</span>
           </div>
           <div>
-            <FontAwesomeIcon icon={faGithub} />
+            <FontAwesomeIcon icon={faCalendarDay} />
             <span>{issueObj?.created_at}</span>
           </div>
           <div>

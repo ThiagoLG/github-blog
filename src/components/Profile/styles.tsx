@@ -12,18 +12,31 @@ export const ProfileContainer = styled.section`
   background: ${({ theme }) => theme['base-profile']};
   box-shadow: 0px 2px 28px 0px rgba(0, 0, 0, 0.2);
   margin-bottom: 3.5rem;
+
+  @media (max-width: 670px) {
+    grid-template-columns: 1fr;
+    gap: 2rem 0;
+  }
 `
 
 export const ProfileAvatar = styled.img`
   width: 9.25rem;
   height: 9.25rem;
   border-radius: 0.5rem;
+  @media (max-width: 670px) {
+    grid-column: 1/3;
+    width: 11.25rem;
+    height: 11.25rem;
+    margin: auto;
+  }
 `
 
 export const ProfileContent = styled.div`
   display: grid;
-  grid-template: 1fr repeat(3, 1fr);
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
   gap: 0.5rem;
+  width: 100%;
 
   .UserTitle {
     display: flex;
@@ -56,6 +69,12 @@ export const ProfileContent = styled.div`
         height: 0.75rem;
       }
     }
+
+    @media (max-width: 450px) {
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+      align-items: center;
+    }
   }
 
   .UserBio {
@@ -64,6 +83,12 @@ export const ProfileContent = styled.div`
       line-height: 160%;
       color: ${({ theme }) => theme['base-text']};
     }
+    @media (max-width: 450px) {
+      text-align: center;
+    }
+  }
+  @media (max-width: 670px) {
+    gap: 1.5rem;
   }
 `
 
@@ -72,6 +97,11 @@ export const ProfileInfosContainer = styled.div`
   align-items: center;
   gap: 1.5rem;
   margin-top: auto;
+
+  @media (max-width: 530px) {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 `
 
 export const ProfileInfoItem = styled.div`

@@ -38,6 +38,10 @@ export const IssueHeaderContent = styled.div`
     font-weight: 700;
     line-height: 130%;
   }
+
+  @media (max-width: 500px) {
+    gap: 1.5rem;
+  }
 `
 
 export const IssueHeaderInfo = styled.div`
@@ -51,5 +55,10 @@ export const IssueHeaderInfo = styled.div`
     gap: 0.5rem;
     color: ${({ theme }) => theme['base-span']};
     font-size: 1rem;
+  }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    gap: 0.25rem;
   }
 `
