@@ -11,6 +11,7 @@ export interface IGithubIssueProps {
   body: string
   created_at: string
   html_url: string
+  comments: number
   user: {
     login: string
   }
@@ -22,6 +23,7 @@ export interface IPostInfos {
   title: string
   created_at: string
   url: string
+  number: number
 }
 
 type LoadingState = 'error' | 'laoding' | 'success'
@@ -30,6 +32,7 @@ interface IPostsContextType {
   posts: IPostInfos[]
   loadingState: LoadingState
   getRepositoryInfos: (query?: string) => Promise<void>
+  getGitRepoFromUrl: () => Promise<string>
 }
 
 export const PostsContext = createContext({} as IPostsContextType)
@@ -39,11 +42,13 @@ export function PostsProvider({ children }: IPostsProviderProps) {
 
   async function getRepositoryInfos(query = '') {
     try {
+      const gitRepo = await getGitRepoFromUrl()
       const response = await api.get(`/search/issues`, {
         params: {
-          q: `${query + ' '}repo:${getGitRepoFromUrl()}`,
+          q: `${query + ' '}repo:${gitRepo}`,
         },
       })
+      console.log(response.data)
 
       const issues: IPostInfos[] = response.data.items || []
       const postsData = issues.map((issue) => {
@@ -56,8 +61,10 @@ export function PostsProvider({ children }: IPostsProviderProps) {
           title: issue.title,
           created_at: friendlyDate,
           url: issue.url,
+          number: issue.number,
         }
       })
+
       setPosts(postsData)
       setLoadingState('success')
     } catch (e) {
@@ -65,16 +72,28 @@ export function PostsProvider({ children }: IPostsProviderProps) {
     }
   }
 
-  function getGitRepoFromUrl() {
-    const validateRepoNameRegex = /^.+\/.+$/
-    const urlParams = new URLSearchParams(location.search)
-    const gitRepo = urlParams.get('repository') || ''
-    if (validateRepoNameRegex.test(gitRepo)) return gitRepo
-    return 'ThiagoLG/github-blog'
+  function getGitRepoFromUrl(): Promise<string> {
+    return new Promise((resolve) => {
+      let gitRepo: string = 'ThiagoLG/github-blog'
+      const validateRepoNameRegex = /^.+\/.+$/
+      const urlParams = new URLSearchParams(location.search)
+      const paramRepo = urlParams.get('repository') || ''
+
+      if (validateRepoNameRegex.test(paramRepo)) gitRepo = paramRepo
+
+      resolve(gitRepo)
+    })
   }
 
   return (
-    <PostsContext.Provider value={{ posts, loadingState, getRepositoryInfos }}>
+    <PostsContext.Provider
+      value={{
+        posts,
+        loadingState,
+        getRepositoryInfos,
+        getGitRepoFromUrl,
+      }}
+    >
       {children}
     </PostsContext.Provider>
   )

@@ -5,6 +5,7 @@ import {
   faComment,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link, useLocation } from 'react-router-dom'
 import { IGithubIssueProps } from '../../contexts/PostsContext'
 import {
   IssueHeaderContainer,
@@ -18,12 +19,14 @@ interface IssueItemProps {
 }
 
 export function IssueHeader({ issueObj }: IssueItemProps) {
+  const { search } = useLocation()
+
   return (
     <IssueHeaderContainer>
       <IssueHeaderLinks>
-        <a href="/">
+        <Link to={`/${search}`}>
           <FontAwesomeIcon icon={faChevronLeft} /> <span>Voltar</span>
-        </a>
+        </Link>
         <a href={issueObj?.html_url}>
           <span>Ver no github</span>
           <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
@@ -42,7 +45,10 @@ export function IssueHeader({ issueObj }: IssueItemProps) {
           </div>
           <div>
             <FontAwesomeIcon icon={faComment} />
-            <span>5 comentátarios</span>
+            <span>
+              {issueObj?.comments} comentário
+              {issueObj?.comments !== 1 && 's'}
+            </span>
           </div>
         </IssueHeaderInfo>
       </IssueHeaderContent>

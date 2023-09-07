@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
-export const PostContainer = styled.article`
+export const PostContainer = styled(motion.article)`
   height: 16.25rem;
   flex-shrink: 0;
   border-radius: 0.625rem;
@@ -10,7 +11,13 @@ export const PostContainer = styled.article`
   grid-template-columns: 1fr auto;
   grid-template-rows: 3.75rem auto;
   gap: 1.25rem;
+  transition: 200ms cubic-bezier(0, 0, 0.01, 1.07);
 
+  &:hover {
+    cursor: pointer;
+    /* transform: scale(1.03) !important; */
+    background: ${({ theme }) => theme['base-profile']};
+  }
   h1 {
     display: -webkit-box;
     -webkit-line-clamp: 2;

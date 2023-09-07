@@ -18,4 +18,11 @@ export const IssueContentContainer = styled.section`
     color: ${({ theme }) => theme.blue};
     text-decoration: none;
   }
+
+  pre {
+    padding: 2rem;
+    background: ${({ theme }) => theme['base-profile']};
+    border-radius: 0.5rem;
+    color: ${({ theme }) => theme.white};
+  }
 `

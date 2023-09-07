@@ -1,3 +1,4 @@
+import { HTMLMotionProps } from 'framer-motion'
 import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyles = createGlobalStyle`
@@ -13,3 +14,7 @@ export const GlobalStyles = createGlobalStyle`
   min-height: 100vh;
  }
 `
+export const pageTransition: HTMLMotionProps<'div'> = {
+  initial: { x: -1000, opacity: 0 },
+  animate: { x: 0, opacity: 1 },
+}

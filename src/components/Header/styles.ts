@@ -6,6 +6,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 
   background: ${({ theme }) => theme['base-profile']};
 `
@@ -37,13 +38,13 @@ export const HeaderFlashes = styled.div`
 
   div {
     position: absolute;
-    opacity: 0.2;
-    background: ${({ theme }) => theme.white};
+    opacity: 0.4;
+    background: ${({ theme }) => theme.blue};
 
     &:nth-child(1) {
       filter: blur(12.5rem);
-      width: 14.75rem;
-      height: 14.75rem;
+      width: 10.75rem;
+      height: 10.75rem;
       left: 0;
       top: 0;
     }
